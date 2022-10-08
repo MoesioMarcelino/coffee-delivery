@@ -10,7 +10,7 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   gap: 72px;
 
-  padding: 34px 56px;
+  padding: 34px 48px;
 `
 
 export const Title = styled.h2`

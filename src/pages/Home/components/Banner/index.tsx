@@ -13,6 +13,7 @@ import {
   Reasons,
   Reason,
   Icon,
+  Image,
 } from './styles'
 
 const TEXTS = texts.banner
@@ -50,7 +51,7 @@ export function Banner() {
           </Reason>
         </Reasons>
       </Content>
-      <img src={mainCoffeeImg} alt={TEXTS.altTexts[1]} width={476} />
+      <Image src={mainCoffeeImg} alt={TEXTS.altTexts[1]} />
     </Container>
   )
 }

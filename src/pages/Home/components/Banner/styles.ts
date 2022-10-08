@@ -22,6 +22,10 @@ export const Title = styled.div`
   line-height: 130%;
   font-weight: 800;
   color: ${({ theme }) => theme['base-title']};
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    line-height: 100%;
+  }
 `
 
 export const Subtitle = styled.div`
@@ -40,6 +44,11 @@ export const Reasons = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 20px 40px;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 `
 
 export const Reason = styled.div`
@@ -56,8 +65,7 @@ type IconColorType = {
 }
 
 export const Icon = styled.div<IconColorType>`
-  height: 32px;
-  width: 32px;
+  padding: 6px;
 
   display: flex;
   justify-content: center;
@@ -67,4 +75,12 @@ export const Icon = styled.div<IconColorType>`
 
   color: ${({ theme }) => theme.white};
   background: ${({ theme, variant }) => theme[variant]};
+`
+
+export const Image = styled.img`
+  width: 476px;
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    display: none;
+  }
 `

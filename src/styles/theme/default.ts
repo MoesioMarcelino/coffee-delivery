@@ -18,4 +18,8 @@ export const defaultTheme = {
 
   background: '#FAFAFA',
   white: '#FFFFFF',
+
+  breakpoints: {
+    desktop: '1080px',
+  },
 }

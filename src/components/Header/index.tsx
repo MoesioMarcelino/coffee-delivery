@@ -2,6 +2,7 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
 
 import coffeeDeliveryLogo from '../../assets/coffe-delivery.svg'
+import { Tooltip } from '../Tooltip'
 
 import {
   ActionsContainer,
@@ -22,10 +23,12 @@ export function Header() {
       </NavLink>
 
       <ActionsContainer>
-        <LocationContainer>
-          <MapPin size={22} weight="fill" />
-          Porto Alegre, RS
-        </LocationContainer>
+        <Tooltip title="Porto Alegre, RS">
+          <LocationContainer>
+            <MapPin size={22} weight="fill" />
+            <div>Porto Alegre, RS</div>
+          </LocationContainer>
+        </Tooltip>
 
         <NavLink to="/cart">
           <ShoppingCartContainer>

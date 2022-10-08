@@ -40,6 +40,12 @@ export const LocationContainer = styled(ActionBase)`
   svg {
     color: ${({ theme }) => theme.purple};
   }
+
+  @media screen and (max-width: ${({ theme }) => theme.breakpoints.desktop}) {
+    div {
+      display: none;
+    }
+  }
 `
 
 export const ShoppingCartContainer = styled(ActionBase)`
