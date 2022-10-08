@@ -5,6 +5,9 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
+    max-width: 1366px;
+    margin: 0 auto;
   }
   
   body {
@@ -15,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
   
   html, body {
     font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
     line-height: 1.3;
   }
 
