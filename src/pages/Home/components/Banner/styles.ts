@@ -6,11 +6,10 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  padding: 0 56px;
+  padding: 56px;
   background-image: url(${({ background }) => background});
 
   display: flex;
-  height: 544px;
   justify-content: center;
   align-items: center;
 `
