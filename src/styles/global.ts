@@ -6,14 +6,14 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     box-sizing: border-box;
 
-    max-width: 1366px;
-    margin: 0 auto;
   }
   
   body {
     background: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme['base-text']};
-    -webkit-font-smoothing: antialiased  
+    -webkit-font-smoothing: antialiased  ;
+    max-width: 1366px;
+    margin: 0 auto;
   }
   
   html, body {
