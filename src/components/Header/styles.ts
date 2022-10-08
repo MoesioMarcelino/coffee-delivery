@@ -8,6 +8,11 @@ export const Container = styled.div`
   align-items: center;
 
   gap: 20px;
+
+  position: sticky;
+  top: 0;
+
+  background: ${({ theme }) => theme.white};
 `
 
 const ActionBase = styled.div`
@@ -28,6 +33,9 @@ export const LocationContainer = styled(ActionBase)`
   padding: 10px;
   border-radius: 6px;
   color: ${({ theme }) => theme['purple-dark']};
+
+  display: flex;
+  align-items: flex-end;
 
   svg {
     color: ${({ theme }) => theme.purple};
