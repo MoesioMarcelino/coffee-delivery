@@ -1,17 +1,21 @@
 import styled, { css } from 'styled-components'
+import { defaultTheme } from '../../styles/theme/default'
 
 interface ButtonContainerProps {
   selected?: boolean
+  background?: keyof typeof defaultTheme
 }
 
 export const ButtonContainer = styled.div<ButtonContainerProps>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   text-transform: uppercase;
   padding: 16px;
-  color: ${({ theme }) => theme.purple};
-  background: ${({ theme }) => theme['base-button']};
+  color: ${({ theme, color }) => color || theme.purple};
+  background: ${({ theme, background }) =>
+    background ? theme[background] : theme['base-button']};
   cursor: pointer;
   border-radius: 6px;
   border: 1px solid transparent;
