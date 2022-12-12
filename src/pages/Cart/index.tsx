@@ -1,12 +1,14 @@
-import { /* AddressForm,  PaymentMethod, */ Resume } from './components'
+import { AddressForm, PaymentMethod, Resume } from './components'
 
-import { Container } from './styles'
+import { Container, LeftSideContainer } from './styles'
 
 export function Cart() {
   return (
     <Container>
-      {/* <AddressForm /> */}
-      {/* <PaymentMethod /> */}
+      <LeftSideContainer>
+        <AddressForm />
+        <PaymentMethod />
+      </LeftSideContainer>
       <Resume />
     </Container>
   )
