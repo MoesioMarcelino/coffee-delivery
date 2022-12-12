@@ -1,24 +1,75 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
   padding: 40px;
   background: ${({ theme }) => theme['base-card']};
   border-radius: 6px;
+  height: fit-content;
+
+  border-top-right-radius: 44px;
+  border-bottom-left-radius: 44px;
+
+  flex: 1;
 `
 
-export const ItemsContainer = styled.div``
+export const ItemsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-export const Item = styled.div``
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 12px;
+`
 
-export const Image = styled.img``
+export const Item = styled.div`
+  display: flex;
+  gap: 50px;
+  align-items: flex-start;
+`
 
-export const Main = styled.div``
+export const ItemDivider = styled.div`
+  background-color: ${({ theme }) => theme['base-button']};
+  height: 1px;
+  width: 100%;
+  margin: 24px 0;
+`
 
-export const ActionsContainer = styled.div``
+export const Main = styled.div`
+  display: flex;
+  gap: 20px;
+  align-items: center;
+`
 
-export const Title = styled.div``
+export const Image = styled.img`
+  height: 64px;
+  width: 64px;
+`
 
-export const Counter = styled.div`
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+`
+
+export const ActionsContainer = styled.div`
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+`
+
+export const Title = styled.div`
+  font-size: 16px;
+  color: ${({ theme }) => theme['base-subtitle']};
+  font-weight: 400;
+`
+
+const containerActionStyle = css`
   display: flex;
   align-items: center;
   height: 38px;
@@ -30,9 +81,32 @@ export const Counter = styled.div`
   border-radius: 6px;
   gap: 4px;
 
+  width: fit-content;
+`
+
+export const CounterAction = styled.div`
+  ${containerActionStyle}
+
   span {
     width: 20px;
     text-align: center;
+  }
+`
+
+export const DeleteAction = styled.div`
+  ${containerActionStyle}
+  cursor: pointer;
+
+  span {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: ${({ theme }) => theme['base-text']};
+  }
+
+  transition: background 0.2s;
+
+  &:hover {
+    background: ${({ theme }) => theme['base-hover']};
   }
 `
 
@@ -48,12 +122,39 @@ export const ButtonAction = styled.button`
   }
 `
 
-export const Value = styled.div``
+export const Value = styled.div`
+  font-size: 16px;
+  font-weight: 700;
+  color: ${({ theme }) => theme['base-text']};
+  white-space: nowrap;
+  margin-left: auto;
+`
 
-export const Divider = styled.div``
+export const ResumeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 
-export const Summary = styled.div``
+  padding: 16px 0;
+`
 
-export const Tax = styled.div``
+const resumeStyle = css`
+  display: flex;
+  justify-content: space-between;
+`
 
-export const Total = styled.div``
+export const Summary = styled.div`
+  ${resumeStyle}
+  font-size: 14px;
+`
+
+export const Tax = styled.div`
+  ${resumeStyle}
+  font-size: 14px;
+`
+
+export const Total = styled.div`
+  ${resumeStyle}
+  font-size: 20px;
+  font-weight: 700;
+`
