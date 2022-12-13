@@ -1,4 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
+import { useState } from 'react'
 import { Button } from '../../../../components'
 
 import {
@@ -10,7 +12,17 @@ import {
   ButtonContainer,
 } from './styles'
 
+enum PaymentMethodEnum {
+  CREDIT = 1,
+  DEBIT = 2,
+  CASH = 3,
+}
+
 export function PaymentMethod() {
+  const [method, setMethod] = useState<PaymentMethodEnum>(
+    PaymentMethodEnum.CREDIT,
+  )
+
   return (
     <Container>
       <HeaderContainer>
@@ -24,16 +36,25 @@ export function PaymentMethod() {
       </HeaderContainer>
 
       <ButtonContainer>
-        <Button selected>
+        <Button
+          selected={method === PaymentMethodEnum.CREDIT}
+          onClick={() => setMethod(PaymentMethodEnum.CREDIT)}
+        >
           <CreditCard size={22} />
           Cartão de crédito
         </Button>
-        <Button>
-          <Money size={22} />
+        <Button
+          selected={method === PaymentMethodEnum.DEBIT}
+          onClick={() => setMethod(PaymentMethodEnum.DEBIT)}
+        >
+          <Bank size={22} />
           Cartão de débito
         </Button>
-        <Button>
-          <Bank size={22} />
+        <Button
+          selected={method === PaymentMethodEnum.CASH}
+          onClick={() => setMethod(PaymentMethodEnum.CASH)}
+        >
+          <Money size={22} />
           Dinheiro
         </Button>
       </ButtonContainer>
