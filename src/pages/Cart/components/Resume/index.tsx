@@ -1,5 +1,6 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { Button } from '../../../../components'
+import { useCart } from '../../../../hooks/Cart'
 import {
   Container,
   ItemsContainer,
@@ -21,27 +22,57 @@ import {
 } from './styles'
 
 export function Resume() {
+  const { items, deleteItemFromCart, addItemToCart, decrementItemFromCart } =
+    useCart()
+
+  const tax = 3.5
+  const totalPartial = items.reduce(
+    (prev, { amount, value }) => prev + amount * Number(value),
+    0,
+  )
+  const total = totalPartial + tax
+
+  function formatCurrency(value: number) {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(value)
+  }
+
   return (
     <Container>
       <ItemsContainer>
-        {[1, 2, 3, 4, 5].map((i) => (
-          <div key={i}>
+        {items.map(({ id, image, title, amount, value }, index) => (
+          <div key={`coffee-option-${id}`}>
             <Item>
               <Main>
-                <Image src="/images/arabe.png" alt="" />
+                <Image src={`/images/${image}`} alt={title} />
                 <Info>
-                  <Title>Expresso Tradicional</Title>
+                  <Title>{title}</Title>
                   <ActionsContainer>
                     <CounterAction>
-                      <ButtonAction>
+                      <ButtonAction
+                        onClick={() => {
+                          amount > 1
+                            ? decrementItemFromCart({
+                                ...items[index],
+                                amount: 1,
+                              })
+                            : deleteItemFromCart(id)
+                        }}
+                      >
                         <Minus weight="fill" size={14} />
                       </ButtonAction>
-                      <span>1</span>
-                      <ButtonAction>
+                      <span>{amount}</span>
+                      <ButtonAction
+                        onClick={() =>
+                          addItemToCart({ ...items[index], amount: 1 })
+                        }
+                      >
                         <Plus weight="fill" size={14} />
                       </ButtonAction>
                     </CounterAction>
-                    <DeleteAction>
+                    <DeleteAction onClick={() => deleteItemFromCart(id)}>
                       <ButtonAction>
                         <Trash size={14} />
                       </ButtonAction>
@@ -50,7 +81,7 @@ export function Resume() {
                   </ActionsContainer>
                 </Info>
               </Main>
-              <Value>R$ 9,90</Value>
+              <Value>{formatCurrency(+value)}</Value>
             </Item>
             <ItemDivider />
           </div>
@@ -60,17 +91,17 @@ export function Resume() {
       <ResumeContainer>
         <Summary>
           <span>Total de Itens</span>
-          <span>R$ 29,70</span>
+          <span>{formatCurrency(totalPartial)}</span>
         </Summary>
 
         <Tax>
           <span>Entrega</span>
-          <span>R$ 3,50</span>
+          <span>{formatCurrency(tax)}</span>
         </Tax>
 
         <Total>
           <span>Total</span>
-          <span>R$ 33,20</span>
+          <span>{formatCurrency(total)}</span>
         </Total>
       </ResumeContainer>
 

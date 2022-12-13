@@ -16,3 +16,18 @@ export const LeftSideContainer = styled.div`
 
   flex: 3;
 `
+
+export const CartEmptyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 24px;
+
+  height: calc(100vh - 260px);
+
+  img {
+    width: 500px;
+  }
+`
