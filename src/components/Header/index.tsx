@@ -2,6 +2,7 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 import { NavLink } from 'react-router-dom'
 
 import coffeeDeliveryLogo from '../../assets/coffe-delivery.svg'
+import { useCart } from '../../hooks/Cart'
 import { Tooltip } from '../Tooltip'
 
 import {
@@ -13,6 +14,8 @@ import {
 } from './styles'
 
 export function Header() {
+  const { total } = useCart()
+
   return (
     <Container>
       <NavLink to="/">
@@ -33,7 +36,7 @@ export function Header() {
         <NavLink to="/cart">
           <ShoppingCartContainer>
             <ShoppingCart size={22} weight="fill" />
-            <BadgeValue>5</BadgeValue>
+            {total > 0 && <BadgeValue>{total}</BadgeValue>}
           </ShoppingCartContainer>
         </NavLink>
       </ActionsContainer>
