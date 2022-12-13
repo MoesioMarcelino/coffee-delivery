@@ -1,4 +1,5 @@
 import { ShoppingCart, Minus, Plus } from 'phosphor-react'
+import { ItemMenu, useCart } from '../../../../hooks/Cart'
 
 import {
   Container,
@@ -15,24 +16,40 @@ import {
   Button,
   Icon,
 } from './styles'
-
-interface MenuItemProps {
-  image: string
-  tags: string[]
-  title: string
-  subtitle: string
-  value: string
-  amount: number
-}
+import { useState } from 'react'
 
 export function MenuItem({
+  id,
   image,
   tags,
   title,
   subtitle,
   value,
-  amount,
-}: MenuItemProps) {
+}: ItemMenu) {
+  const { addItemToCart } = useCart()
+
+  const [quantity, setQuantity] = useState(1)
+
+  const item: ItemMenu = {
+    id,
+    image,
+    tags,
+    title,
+    subtitle,
+    value,
+    amount: quantity,
+  }
+
+  function incrementQuantity() {
+    setQuantity(quantity + 1)
+  }
+
+  function decrementQuantity() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1)
+    }
+  }
+
   return (
     <Container>
       <Image src={`/images/${image}`} alt={title} />
@@ -54,15 +71,20 @@ export function MenuItem({
         </Price>
         <ActionsContainer>
           <Counter>
-            <Button>
+            <Button onClick={decrementQuantity}>
               <Minus weight="fill" size={14} />
             </Button>
-            <span>{amount}</span>
-            <Button>
+            <span>{quantity}</span>
+            <Button onClick={incrementQuantity}>
               <Plus weight="fill" size={14} />
             </Button>
           </Counter>
-          <Icon>
+          <Icon
+            onClick={() => {
+              console.log('passei aqui', item)
+              addItemToCart(item)
+            }}
+          >
             <ShoppingCart weight="fill" size={22} />
           </Icon>
         </ActionsContainer>

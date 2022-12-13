@@ -1,5 +1,5 @@
+import { itemsMenu } from '../../content/menu'
 import { Banner, MenuItem } from './components'
-import { itemMenu } from './menu'
 
 import { Container, MenuContainer, Title, ItemsContainer } from './styles'
 
@@ -12,7 +12,7 @@ export function Home() {
         <Title>Nossos cafés</Title>
 
         <ItemsContainer>
-          {itemMenu.map((item) => (
+          {itemsMenu.map((item) => (
             <MenuItem key={`coffee-option-${item.id}`} {...item} />
           ))}
         </ItemsContainer>
