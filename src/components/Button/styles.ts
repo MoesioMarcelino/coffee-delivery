@@ -27,7 +27,7 @@ export const ButtonContainer = styled.div<ButtonContainerProps>`
   transition: background 0.2s;
 
   &:hover {
-    background: ${({ theme }) => theme['base-hover']};
+    background: ${({ theme }) => theme['yellow-dark']};
   }
 
   ${({ selected }) =>
