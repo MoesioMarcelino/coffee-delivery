@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 export type ItemMenu = {
   id: string
@@ -15,9 +21,23 @@ type ResumeCart = {
   items: ItemMenu[]
 }
 
+export type ClientInfoProps = {
+  name: string
+  surname?: string
+  zipCode: string
+  street: string
+  number: string
+  complement?: string
+  neighborhood: string
+  city: string
+  uf: string
+}
+
 interface CartHookProps {
   items: ItemMenu[]
   total: number
+  clientInfo: ClientInfoProps
+  updateClientInfo: (info: ClientInfoProps) => void
   addItemToCart: (item: ItemMenu) => void
   decrementItemFromCart: (item: ItemMenu) => void
   deleteItemFromCart: (id: string) => void
@@ -35,11 +55,33 @@ interface ManageItemsProps {
 
 const CartContext = createContext<CartHookProps>({} as CartHookProps)
 
+const CART_KEY_STORAGE = '@coffeeDelivery:cart'
+
 function CartProvider({ children }: CartProviderProps) {
-  const [{ items, total }, setItems] = useState<ResumeCart>({
-    items: [],
-    total: 0,
+  const [{ items, total }, setItems] = useState<ResumeCart>(() => {
+    const storage = localStorage.getItem(CART_KEY_STORAGE)
+
+    if (storage) {
+      return JSON.parse(storage)
+    }
+
+    return {
+      items: [],
+      total: 0,
+    }
   })
+
+  const [clientInfo, setClientInfo] = useState<ClientInfoProps>(
+    {} as ClientInfoProps,
+  )
+
+  useEffect(() => {
+    localStorage.setItem(CART_KEY_STORAGE, JSON.stringify({ items, total }))
+  }, [items, total])
+
+  function updateClientInfo(info: ClientInfoProps) {
+    setClientInfo(info)
+  }
 
   function incrementItemToCart({ item, index, total }: ManageItemsProps) {
     return setItems({
@@ -101,6 +143,8 @@ function CartProvider({ children }: CartProviderProps) {
       value={{
         items,
         total,
+        clientInfo,
+        updateClientInfo,
         addItemToCart,
         decrementItemFromCart,
         deleteItemFromCart,

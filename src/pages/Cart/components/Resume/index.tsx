@@ -1,6 +1,8 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { Button } from '../../../../components'
 import { useCart } from '../../../../hooks/Cart'
+import { useModal } from '../../../../hooks/Modal'
+import { checkFormValid } from '../../../../utils/checkFormValid'
 import {
   Container,
   ItemsContainer,
@@ -22,8 +24,14 @@ import {
 } from './styles'
 
 export function Resume() {
-  const { items, deleteItemFromCart, addItemToCart, decrementItemFromCart } =
-    useCart()
+  const {
+    items,
+    deleteItemFromCart,
+    addItemToCart,
+    decrementItemFromCart,
+    clientInfo,
+  } = useCart()
+  const { updateModalStatus, updateModalContent } = useModal()
 
   const tax = 3.5
   const totalPartial = items.reduce(
@@ -38,6 +46,23 @@ export function Resume() {
       currency: 'BRL',
     }).format(value)
   }
+
+  function showModalCallback() {
+    updateModalContent(<h2>teste</h2>)
+    updateModalStatus(true)
+  }
+
+  const formIsValid = checkFormValid({
+    name: clientInfo.name,
+    zipCode: clientInfo.zipCode,
+    street: clientInfo.street,
+    number: clientInfo.number,
+    neighborhood: clientInfo.neighborhood,
+    city: clientInfo.city,
+    uf: clientInfo.uf,
+  })
+
+  console.log('formIsValid', formIsValid)
 
   return (
     <Container>
@@ -105,7 +130,7 @@ export function Resume() {
         </Total>
       </ResumeContainer>
 
-      <Button background="yellow" color="#fff">
+      <Button background="yellow" color="#fff" onClick={showModalCallback}>
         Confirmar pedido
       </Button>
     </Container>
