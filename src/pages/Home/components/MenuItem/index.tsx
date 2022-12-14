@@ -79,12 +79,7 @@ export function MenuItem({
               <Plus weight="fill" size={14} />
             </Button>
           </Counter>
-          <Icon
-            onClick={() => {
-              console.log('passei aqui', item)
-              addItemToCart(item)
-            }}
-          >
+          <Icon onClick={() => addItemToCart(item)}>
             <ShoppingCart weight="fill" size={22} />
           </Icon>
         </ActionsContainer>
